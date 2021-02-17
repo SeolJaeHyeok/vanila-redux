@@ -1,23 +1,15 @@
+import { createStore } from "redux";
+
 const add = document.getElementById("add");
 const minus = document.getElementById("minus");
 const number = document.querySelector("span");
 
-let count = 0;
-number.innerText = count;
-
-const updateText = () => {
-  number.innerText = count;
+// createStore의 reducer => 유일하게 data를 modify 할 수 있음
+// 그렇다면 어떻게 수정하느냐 => actions를 통해 data modify 가능
+const countModifier = (count = 0) => {
+  return count;
 };
 
-const handleAdd = () => {
-  count = count + 1;
-  updateText();
-};
+const countStore = createStore(countModifier);
 
-const handleMinus = () => {
-  count = count - 1;
-  updateText();
-};
-
-add.addEventListener("click", handleAdd);
-minus.addEventListener("click", handleMinus);
+console.log(countStore.getState());
