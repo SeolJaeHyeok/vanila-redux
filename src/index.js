@@ -22,7 +22,7 @@ const reducer = (state = [], action) => {
       // state를 변형(mutate)하는 것이 아니라 ex)state.push() 새로운 state를 return 해야만 한다. 새로운 state를 이전의 state와 새로운 toDo를 가짐
       return [{ text: action.text, id: Date.now() }, ...state];
     case DELETE_TODO:
-      return [];
+      return state.filter((toDo) => toDo.id !== action.id);
     default:
       return state;
   }
@@ -41,7 +41,7 @@ const addToDo = (text) => {
 };
 
 const deleteToDo = (event) => {
-  const id = event.target.parentNode.id;
+  const id = parseInt(event.target.parentNode.id);
   store.dispatch(deleteToDoAction(id));
 };
 
